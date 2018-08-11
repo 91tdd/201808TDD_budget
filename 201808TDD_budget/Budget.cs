@@ -21,7 +21,12 @@ namespace _201808TDD_budget
 
         public decimal EffectiveAmount(Period period)
         {
-            return DailyAmount() * period.OverlappingDays(new Period(this.FirstDay, this.LastDay));
+            return DailyAmount() * period.OverlappingDays(CreatePeriod());
+        }
+
+        private Period CreatePeriod()
+        {
+            return new Period(this.FirstDay, this.LastDay);
         }
     }
 }
