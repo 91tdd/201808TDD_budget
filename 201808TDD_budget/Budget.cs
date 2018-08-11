@@ -17,10 +17,9 @@ namespace _201808TDD_budget
             }
         }
 
-        private DateTime FirstDay()
+        public DateTime FirstDay()
         {
-            var firstDay = DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
-            return firstDay;
+            return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
         }
     }
 }

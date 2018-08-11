@@ -21,7 +21,7 @@ namespace _201808TDD_budget
 
         public decimal OverlappingDays(Budget budget)
         {
-            if (Start > budget.LastDay)
+            if (Start > budget.LastDay || End <budget.FirstDay())
             {
                 return 0;
             }
