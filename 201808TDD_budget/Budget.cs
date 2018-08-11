@@ -15,13 +15,13 @@ namespace _201808TDD_budget
 
         public decimal DailyAmount()
         {
-            decimal dailyAmount = Amount / (decimal) DaysInMonth;
+            decimal dailyAmount = Amount / (decimal)DaysInMonth;
             return dailyAmount;
         }
 
         public decimal EffectiveAmount(Period period)
         {
-            return DailyAmount() * period.OverlappingDays(this);
+            return DailyAmount() * period.OverlappingDays(new Period(this.FirstDay, this.LastDay));
         }
     }
 }

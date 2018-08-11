@@ -17,27 +17,27 @@ namespace _201808TDD_budget
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
 
-        public decimal OverlappingDays(Budget budget)
+        public decimal OverlappingDays(Period otherPeriod)
         {
-            if (HasNoOverlapping(budget))
+            if (HasNoOverlap(otherPeriod))
             {
                 return 0;
             }
 
-            var effectiveEnd = budget.LastDay < End
-                ? budget.LastDay
+            var effectiveEnd = otherPeriod.End < End
+                ? otherPeriod.End
                 : End;
 
-            var effectiveStart = budget.FirstDay > Start
-                ? budget.FirstDay
+            var effectiveStart = otherPeriod.Start > Start
+                ? otherPeriod.Start
                 : Start;
 
             return (effectiveEnd - effectiveStart).Days + 1;
         }
 
-        private bool HasNoOverlapping(Budget budget)
+        private bool HasNoOverlap(Period otherPeriod)
         {
-            return Start > budget.LastDay || End < budget.FirstDay;
+            return Start > otherPeriod.End || End < otherPeriod.Start;
         }
     }
 }
