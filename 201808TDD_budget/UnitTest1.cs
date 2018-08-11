@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace _201808TDD_budget
 {
@@ -19,20 +19,22 @@ namespace _201808TDD_budget
 
         [TestMethod]
         public void no_budgets()
+
         {
-            _budgetRepo.GetAll().Returns(new List<Budget> { });
+            GivenBudgets();
             AmountShouldBe(0, "20180301", "20180301");
         }
 
         [TestMethod]
         public void period_inside_budget_month()
         {
-            _budgetRepo.GetAll().Returns(new List<Budget>
-            {
-                new Budget{YearMonth="201803", Amount=31}
-            });
-
+            GivenBudgets(new Budget { YearMonth = "201803", Amount = 31 }); 
             AmountShouldBe(1, "20180301", "20180301");
+        }
+
+        private void GivenBudgets(params Budget[] budgets)
+        {
+            _budgetRepo.GetAll().Returns(budgets.ToList());
         }
 
         private void AmountShouldBe(int expected, string start, string end)
