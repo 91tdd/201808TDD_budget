@@ -53,6 +53,13 @@ namespace _201808TDD_budget
             AmountShouldBe(expected: 1, start: "20180331", end: "20180401");
         }
 
+        [TestMethod]
+        public void period_overlap_budget_FirstDay()
+        {
+            GivenBudgets(new Budget { YearMonth = "201803", Amount = 31 });
+            AmountShouldBe(expected: 1, start: "20180228", end: "20180301");
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _budgetRepo.GetAll().Returns(budgets.ToList());
