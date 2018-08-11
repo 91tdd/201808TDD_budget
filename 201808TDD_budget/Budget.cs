@@ -11,15 +11,11 @@ namespace _201808TDD_budget
         {
             get
             {
-                var firstDay = FirstDay();
-                var daysInMonth = DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
+                var daysInMonth = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
                 return DateTime.ParseExact(YearMonth + daysInMonth, "yyyyMMdd", null);
             }
         }
 
-        public DateTime FirstDay()
-        {
-            return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
-        }
+        public DateTime FirstDay => DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
     }
 }
