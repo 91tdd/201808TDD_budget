@@ -15,14 +15,9 @@ namespace _201808TDD_budget
         public decimal TotalAmount(DateTime start, DateTime end)
         {
             var period = new Period(start, end);
-            var budgets = _budgetRepo.GetAll();
-            var totalAmount = 0m;
-            foreach (var budget in budgets)
-            {
-                totalAmount += budget.EffectiveAmount(period);
-            }
 
-            return totalAmount;
+            return _budgetRepo.GetAll()
+                .Sum(b => b.EffectiveAmount(period));
         }
     }
 }
