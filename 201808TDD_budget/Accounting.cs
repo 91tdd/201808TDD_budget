@@ -3,6 +3,23 @@ using System.Linq;
 
 namespace _201808TDD_budget
 {
+    public class Period
+    {
+        public Period(DateTime start, DateTime end)
+        {
+            Start = start;
+            End = end;
+        }
+
+        public DateTime Start { get; private set; }
+        public DateTime End { get; private set; }
+
+        public decimal Days()
+        {
+            return (End - Start).Days + 1;
+        }
+    }
+
     public class Accounting
     {
         private readonly IBudgetRepo _budgetRepo;
@@ -14,10 +31,11 @@ namespace _201808TDD_budget
 
         public decimal TotalAmount(DateTime start, DateTime end)
         {
+            var period = new Period(start, end);
             var budgets = _budgetRepo.GetAll();
             if (budgets.Any())
             {
-                return (end - start).Days + 1;
+                return period.Days();
             }
             return 0;
         }
