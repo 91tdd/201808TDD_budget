@@ -12,5 +12,11 @@ namespace _201808TDD_budget
         public int DaysInMonth => DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
 
         public DateTime FirstDay => DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
+
+        public decimal DailyAmount()
+        {
+            decimal dailyAmount = Amount / (decimal) DaysInMonth;
+            return dailyAmount;
+        }
     }
 }
