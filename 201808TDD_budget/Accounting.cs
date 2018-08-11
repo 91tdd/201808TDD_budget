@@ -19,7 +19,9 @@ namespace _201808TDD_budget
             if (budgets.Any())
             {
                 var budget = budgets[0];
-                return period.OverlappingDays(budget);
+                var overlappingDays = period.OverlappingDays(budget);
+                decimal dailyAmount = budget.Amount / (decimal)budget.DaysInMonth;
+                return dailyAmount * overlappingDays;
             }
             return 0;
         }
