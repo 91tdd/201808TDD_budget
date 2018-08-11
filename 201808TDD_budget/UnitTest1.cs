@@ -75,6 +75,16 @@ namespace _201808TDD_budget
             AmountShouldBe(expected: 20, start: "20180301", end: "20180302");
         }
 
+        [TestMethod]
+        public void multiple_budgets()
+        {
+            GivenBudgets(
+                new Budget { YearMonth = "201803", Amount = 310 },
+                new Budget { YearMonth = "201804", Amount = 30 });
+
+            AmountShouldBe(expected: 11, start: "20180331", end: "20180401");
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _budgetRepo.GetAll().Returns(budgets.ToList());

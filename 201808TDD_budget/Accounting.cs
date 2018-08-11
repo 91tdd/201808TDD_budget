@@ -16,12 +16,13 @@ namespace _201808TDD_budget
         {
             var period = new Period(start, end);
             var budgets = _budgetRepo.GetAll();
-            if (budgets.Any())
+            var totalAmount = 0m;
+            foreach (var budget in budgets)
             {
-                var budget = budgets[0];
-                return budget.EffectiveAmount(period);
+                totalAmount += budget.EffectiveAmount(period);
             }
-            return 0;
+
+            return totalAmount;
         }
     }
 }
