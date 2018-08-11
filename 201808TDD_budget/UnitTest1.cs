@@ -6,14 +6,25 @@ namespace _201808TDD_budget
     [TestClass]
     public class AccountingTests
     {
+        private Accounting _accounting;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _accounting = new Accounting();
+        }
+
         [TestMethod]
         public void no_budgets()
         {
-            var accounting = new Accounting();
-            var start = new DateTime(2018, 3, 1);
-            var end = new DateTime(2018, 3, 1);
-            var totalAmount = accounting.TotalAmount(start, end);
-            Assert.AreEqual(0, totalAmount);
+            AmountShouldBe(0, "20180301", "20180301");
+        }
+
+        private void AmountShouldBe(int expected, string start, string end)
+        {
+            var startDate = DateTime.ParseExact(start, "yyyyMMdd", null);
+            var endDate = DateTime.ParseExact(end, "yyyyMMdd", null);
+            Assert.AreEqual(expected, _accounting.TotalAmount(startDate, endDate));
         }
     }
 }
