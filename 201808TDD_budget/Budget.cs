@@ -18,5 +18,10 @@ namespace _201808TDD_budget
             decimal dailyAmount = Amount / (decimal) DaysInMonth;
             return dailyAmount;
         }
+
+        public decimal EffectiveAmount(Period period)
+        {
+            return DailyAmount() * period.OverlappingDays(this);
+        }
     }
 }
