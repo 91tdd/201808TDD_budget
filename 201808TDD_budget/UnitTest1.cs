@@ -60,6 +60,14 @@ namespace _201808TDD_budget
             AmountShouldBe(expected: 1, start: "20180228", end: "20180301");
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void invalid_date()
+        {
+            GivenBudgets(new Budget { YearMonth = "201803", Amount = 31 });
+            _accounting.TotalAmount(DateTime.ParseExact("20180228", "yyyyMMdd", null), DateTime.ParseExact("20170301", "yyyyMMdd", null));
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _budgetRepo.GetAll().Returns(budgets.ToList());
