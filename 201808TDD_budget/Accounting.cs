@@ -14,11 +14,6 @@ namespace _201808TDD_budget
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
 
-        public decimal Days()
-        {
-            return (End - Start).Days + 1;
-        }
-
         public decimal OverlappingDays(Budget budget)
         {
             if (HasNoOverlapping(budget))
@@ -26,7 +21,11 @@ namespace _201808TDD_budget
                 return 0;
             }
 
-            return Days();
+            var effectiveEnd = budget.LastDay < End
+                ? budget.LastDay
+                : End;
+
+            return (effectiveEnd - Start).Days + 1;
         }
 
         private bool HasNoOverlapping(Budget budget)
