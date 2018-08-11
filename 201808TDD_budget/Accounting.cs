@@ -35,6 +35,10 @@ namespace _201808TDD_budget
             var budgets = _budgetRepo.GetAll();
             if (budgets.Any())
             {
+                if (period.Start>budgets[0].LastDay)
+                {
+                    return 0;
+                }
                 return period.Days();
             }
             return 0;
