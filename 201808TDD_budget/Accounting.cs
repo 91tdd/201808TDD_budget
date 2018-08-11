@@ -18,6 +18,16 @@ namespace _201808TDD_budget
         {
             return (End - Start).Days + 1;
         }
+
+        public decimal OverlappingDays(Budget budget)
+        {
+            if (Start > budget.LastDay)
+            {
+                return 0;
+            }
+
+            return Days();
+        }
     }
 
     public class Accounting
@@ -35,11 +45,8 @@ namespace _201808TDD_budget
             var budgets = _budgetRepo.GetAll();
             if (budgets.Any())
             {
-                if (period.Start>budgets[0].LastDay)
-                {
-                    return 0;
-                }
-                return period.Days();
+                var budget = budgets[0];
+                return period.OverlappingDays(budget);
             }
             return 0;
         }
